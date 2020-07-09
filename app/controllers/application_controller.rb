@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :null_session
   private
   def respond(opts={})
     serialized_json = opts[:serializer] || hashify_vars
