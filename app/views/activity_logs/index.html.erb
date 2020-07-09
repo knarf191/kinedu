@@ -1,0 +1,35 @@
+<h1>Log de actividades</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Bebé</th>
+      <th>Asistente</th>
+      <th>Actividad</th>
+      <th>Inicio</th>
+      <th>Estatus</th>
+      <th>Duración</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @activities_log.each do |activity| %>
+      <tr>
+        <td><%= activity.id %></td>
+        <td><%= activity.baby.name %></td>
+        <td><%= activity.assistant.name %></td>
+        <td><%= activity.activity.name %></td>
+        <td><%= activity.start_time.to_datetime.in_time_zone("America/Monterrey").strftime('%Y-%m-%d %H:%M') %></td>
+        <%if activity.stop_time.nil? || activity.stop_time.blank?%>
+          <td>En progreso</td>
+        <%else %>
+          <td>Terminada</td>
+        <%end %>
+        <%if activity.stop_time.nil? || activity.stop_time.blank?%>
+          <td>*</td>
+        <%else %>
+          <td><%= activity.duration %> min</td>
+        <%end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
